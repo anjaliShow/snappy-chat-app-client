@@ -1,0 +1,45 @@
+.card {
+  width: 375px;
+  padding: 15px 20px;
+  backdrop-filter: blur(2px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.278);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.587);
+  box-shadow: 0 8px 32px 0 rgba(246, 246, 246, 0.37);
+}
+.form-group {
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+}
+.form-control {
+  padding: 12px;
+  border: none;
+  outline: none;
+  background-color: #0a0e1585;
+  border-radius: 5px;
+  color: #fff;
+  &::placeholder {
+    color: #c0c0c0;
+    font-weight: 400;
+  }
+}
+label {
+  margin-bottom: 5px;
+  color: #fff;
+  font-weight: 500;
+}
+.btn {
+  outline: none;
+  color: #111;
+  text-transform: uppercase;
+  padding: 12px;
+  text-align: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-weight: 600;
+}
