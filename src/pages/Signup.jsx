@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { userRegister } from "../store/actions/authAction";
-import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { registerRoute } from "../utils/ApiRoutes";
-import axios from "axios";
-import Logo from "../assets/logo.svg";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userRegister } from '../store/actions/authAction';
+import styled from 'styled-components';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { registerRoute } from '../utils/ApiRoutes';
+import axios from 'axios';
+import Logo from '../assets/logo.svg';
 
 const Signup = () => {
   const navigate = useNavigate();
   const toastOptions = {
-    position: "bottom-right",
+    position: 'bottom-right',
     autoClose: 8000,
     pauseOnHover: true,
     draggable: true,
-    theme: "dark",
+    theme: 'dark',
   };
   const [values, setValues] = useState({
-    userName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   useEffect(() => {
-    if (localStorage.getItem("chat-app-current-user")) {
-      navigate("/");
+    if (localStorage.getItem('chat-app-current-user')) {
+      navigate('/');
     }
   }, []);
 
@@ -35,58 +35,58 @@ const Signup = () => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleValidation = () => {
-    const { password, confirmPassword, userName, email } = values;
-    if (password !== confirmPassword) {
-      toast.error(
-        "Password and confirm password should be same.",
-        toastOptions
-      );
-      return false;
-    } else if (userName.length < 3) {
-      toast.error(
-        "Username should be greater than 3 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (password.length < 4) {
-      toast.error(
-        "Password should be equal or greater than 8 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (email === "") {
-      toast.error("Email is required.", toastOptions);
-      return false;
-    }
+  // const handleValidation = () => {
+  //   const { password, confirmPassword, userName, email } = values;
+  //   if (password !== confirmPassword) {
+  //     toast.error(
+  //       "Password and confirm password should be same.",
+  //       toastOptions
+  //     );
+  //     return false;
+  //   } else if (userName.length < 3) {
+  //     toast.error(
+  //       "Username should be greater than 3 characters.",
+  //       toastOptions
+  //     );
+  //     return false;
+  //   } else if (password.length < 4) {
+  //     toast.error(
+  //       "Password should be equal or greater than 8 characters.",
+  //       toastOptions
+  //     );
+  //     return false;
+  //   } else if (email === "") {
+  //     toast.error("Email is required.", toastOptions);
+  //     return false;
+  //   }
 
-    return true;
-  };
+  //   return true;
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (handleValidation()) {
-      const { email, userName, password } = values;
-      const { data } = await axios.post(registerRoute, {
-        userName,
-        email,
-        password,
-      });
-      console.log("data", data);
+    // if (handleValidation()) {
+    const { email, userName, password } = values;
+    const { data } = await axios.post(registerRoute, {
+      userName,
+      email,
+      password,
+    });
+    console.log('data', data);
 
-      if (data.success === false) {
-        toast.error(data.message, toastOptions);
-      }
-      if (data.success === true) {
-        toast.success(data.message, toastOptions);
-        localStorage.setItem(
-          "chat-app-current-user",
-          // JSON.stringify(data.newUser.email)
-          JSON.stringify(data.newUser)
-        );
-        navigate("/set-avatar");
-      }
+    if (data.success === false) {
+      toast.error(data.message, toastOptions);
     }
+    if (data.success === true) {
+      toast.success(data.message, toastOptions);
+      localStorage.setItem(
+        'chat-app-current-user',
+        // JSON.stringify(data.newUser.email)
+        JSON.stringify(data.newUser)
+      );
+      navigate('/set-avatar');
+    }
+    // }
   };
 
   return (
