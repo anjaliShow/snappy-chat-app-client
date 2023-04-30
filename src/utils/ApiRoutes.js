@@ -1,4 +1,5 @@
-export const host = "http://localhost:8000";
+// export const host = "http://localhost:8000";
+export const host = 'https://snappy-chat-app-server.onrender.com';
 
 export const registerRoute = `${host}/api/auth/user-register`;
 export const loginRoute = `${host}/api/auth/user-login`;
